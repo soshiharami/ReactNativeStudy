@@ -20,7 +20,8 @@ const Hello: React.FC<Props> = (props) => {
     const getExclamationMarks = (numChars: number) =>
         Array(numChars + 1).join('!');
     return (
-        <View style={styles.root}>
+        <SafeAreaView style={{flex: 1}}>
+            <View style={styles.root}>
                 <Text style={styles.greeting}>
                     Hello{' '}
                     {props.name + getExclamationMarks(enthusiasmLevel || 0)}
@@ -44,7 +45,8 @@ const Hello: React.FC<Props> = (props) => {
                         />
                     </View>
                 </View>
-        </View>
+            </View>
+        </SafeAreaView>
     );
 };
 
@@ -72,7 +74,6 @@ const styles = StyleSheet.create({
         borderWidth: 5
     },
     button: {
-        flex: 1,
         paddingVertical: 0
     },
     greeting: {
@@ -80,7 +81,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     container: {
-        flex: 10,
     },
 });
 
