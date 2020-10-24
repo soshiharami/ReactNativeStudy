@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Square from "./Square";
 
 type Squares = {
@@ -41,18 +41,25 @@ const Board: React.FC = () => {
     } else {
         status = 'Next player: ' + (squares.xIsNext ? 'X' : '0')
     }
+
     const renderSquare = (number: number) => {
         return <Square value={squares.values[number]} onPress={() => handlePress(number)}/>
     }
 
     const handlePress = (i: number) => {
-        const values = squares.values.slice()
-        values[i] = squares.xIsNext ? 'X' : 'O'
-        setSquares({
-            values: values,
-            xIsNext: !squares.xIsNext
-        })
+        if (squares.values[i] == null && !winner) {
+            const values = squares.values.slice()
+            values[i] = squares.xIsNext ? 'X' : 'O'
+            setSquares({
+                values: values,
+                xIsNext: !squares.xIsNext
+            })
+        }
     }
+
+    const resetSquares = React.useCallback(
+        () => setSquares(initialSquares), [setSquares, initialSquares]
+    )
 
     return (
         <View style={styles.container}>
@@ -72,6 +79,9 @@ const Board: React.FC = () => {
                 {renderSquare(7)}
                 {renderSquare(8)}
             </View>
+            <TouchableOpacity style={styles.reset}>
+                <Text style={styles.text} onPress={resetSquares}>{"RESET"}</Text>
+            </TouchableOpacity>
         </View>
     )
 };
@@ -86,6 +96,25 @@ const styles = StyleSheet.create({
     },
     rowContainer: {
         flexDirection: 'row',
+    },
+    text: {
+        fontSize: 24,
+    },
+    reset: {
+        "borderWidth": 0,
+        "borderColor": "black",
+        "borderStyle": "solid",
+        "borderTopLeftRadius": 5,
+        "borderTopRightRadius": 5,
+        "borderBottomRightRadius": 5,
+        "borderBottomLeftRadius": 5,
+        "backgroundColor": "#4676D7",
+        "color": "#fff",
+        "paddingTop": 8,
+        "paddingRight": 16,
+        "paddingBottom": 8,
+        "paddingLeft": 16,
+        "fontSize": 16
     }
 })
 
