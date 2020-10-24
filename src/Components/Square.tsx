@@ -1,10 +1,16 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, Text } from 'react-native'
+import {StyleSheet, Text, TouchableOpacity} from 'react-native'
 
-const Square: React.FC = () => {
+type Props = {
+    value: 'X' | 'O' | null
+    onPress: () => void
+}
+
+const Square: React.FC<Props> = (props) => {
+    const {value} = props;
     return (
-        <TouchableOpacity style={styles.container}>
-            <Text style={styles.text}>x</Text>
+        <TouchableOpacity style={styles.container} onPress={props.onPress}>
+            <Text style={styles.text}>{value}</Text>
         </TouchableOpacity>)
 }
 

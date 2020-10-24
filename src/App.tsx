@@ -1,17 +1,13 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
-import Hello from "./Components/Hello";
-import Board from "./Components/Board";
+import Game from "./Components/Game";
 
 dayjs.locale("ja");
 
 const App: FC = () => {
     return(
-        <div>
-            <Hello name={"soshi"}/>
-            <Board/>
-        </div>
+        <Game/>
     )
 };
 
