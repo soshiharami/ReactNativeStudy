@@ -1,13 +1,16 @@
 import React, {FC} from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
-import Game from "./Components/Game";
+import MainNavigator from "./Components/MainNavigator";
+import {NavigationContainer} from "@react-navigation/native";
 
 dayjs.locale("ja");
 
 const App: FC = () => {
     return(
-            <Game/>
+        <NavigationContainer>
+            <MainNavigator/>
+        </NavigationContainer>
     )
 };
 
